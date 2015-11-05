@@ -44,7 +44,7 @@ platform:
 
 install:
     # Use the pre-installed Miniconda for the desired arch
-    - ps: if($env:TARGET_ARCH -eq '32') {
+    - ps: if($env:TARGET_ARCH -eq 'x86') {
             $env:path="C:\Miniconda;C:\Miniconda\Scripts;C:Miniconda\Library\bin;$($env:path)"
             }
             else {
@@ -68,7 +68,7 @@ install:
     - cmd: set PYTHONUNBUFFERED=1
 
     - cmd: conda install -c http://conda.binstar.org/pelson/channel/development --yes --quiet obvious-ci
-    - cmd: obvci_install_conda_build_tools.py
+    - cmd: obvci_install_conda_build_tools.exe
 
     - cmd: conda config --add channels conda-forge
     - cmd: conda config --set show_channel_urls yes
@@ -78,4 +78,4 @@ install:
 build: off
 
 test_script:
-    - '%CMD_IN_ENV% obvci_conda_build_dir.py recipes conda-forge --channel main  --build-condition "numpy >=1.8" "%PY_CONDITION%"'
+    - '%CMD_IN_ENV% obvci_conda_build_dir.exe recipes conda-forge --channel main  --build-condition "numpy >=1.8" "%PY_CONDITION%"'
