@@ -36,12 +36,29 @@ platform:
     - x64
 
 install:
+    # Use the pre-installed Miniconda for the desired arch
+    - ps: if($env:TARGET_ARCH -eq '32') {
+            $env:path="C:\Miniconda;C:\Miniconda\Scripts;C:Miniconda\Library\bin;$($env:path)"
+            }
+            else {
+            $env:path="C:\Miniconda-x64;C:\Miniconda-x64\Scripts;C:Miniconda-x64\Library\bin;$($env:path)"
+            }
+
+    # DEBUGGING
+    #- "SET PATH"
+    #- "python --version"
+    #- "python -c \"import struct; print(struct.calcsize('P') * 8)\""
+    #- "conda info"
+    #- "conda list"
+
+    # Create and activate a conda environment with the desired Python version
+    - "conda update --yes --quiet conda"
+    - "conda create --yes --quiet -n matrix_env python=%CONDA_PY%"
+    - "activate matrix_env"
+
     # Set the CONDA_NPY, although it has no impact on the actual build. We need this because of a test within conda-build.
     - cmd: set CONDA_NPY=19
 
-    - appveyor DownloadFile "https://raw.githubusercontent.com/pelson/Obvious-CI/master/bootstrap-obvious-ci-and-miniconda.py"
-    - cmd: python bootstrap-obvious-ci-and-miniconda.py %CONDA_INSTALL_LOCN% %TARGET_ARCH% %CONDA_PY:~0,1% --without-obvci
-    - cmd: set PATH=%PATH%;%CONDA_INSTALL_LOCN%;%CONDA_INSTALL_LOCN%\scripts
     - cmd: set PYTHONUNBUFFERED=1
 
     - cmd: conda install -c http://conda.binstar.org/pelson/channel/development --yes --quiet obvious-ci
