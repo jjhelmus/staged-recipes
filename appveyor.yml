@@ -60,8 +60,7 @@ install:
 
     # Create and activate a conda environment with the desired Python version
     - "conda update --yes --quiet conda"
-    - "conda create --yes --quiet -n matrix_env python=%PYTHON_VERSION%"
-    - "activate matrix_env"
+    - "conda install --yes --quiet python=%PYTHON_VERSION%"
 
     # Set the CONDA_NPY, although it has no impact on the actual build. We need this because of a test within conda-build.
     - cmd: set CONDA_NPY=19
