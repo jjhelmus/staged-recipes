@@ -19,15 +19,22 @@ environment:
     # Not sure how to resolve this, but maybe we should be tracking the VS version in the build string anyway? 
     - TARGET_ARCH: "x86"
       CONDA_PY: "27"
+      PYTHON_VERSION: "2.7"
       PY_CONDITION: "python >=2.7,<3"
+
     - TARGET_ARCH: "x86"
       CONDA_PY: "34"
+      PYTHON_VERSION: "3.4"
       PY_CONDITION: "python >=3.4,<3.5"
+
     - TARGET_ARCH: "x64"
       CONDA_PY: "27"
+      PYTHON_VERSION: "2.7"
       PY_CONDITION: "python >=2.7,<3"
+
     - TARGET_ARCH: "x64"
       CONDA_PY: "34"
+      PYTHON_VERSION: "3.4"
       PY_CONDITION: "python >=3.4,<3.5"
 
 # We always use a 64-bit machine, but can build x86 distributions
@@ -53,7 +60,7 @@ install:
 
     # Create and activate a conda environment with the desired Python version
     - "conda update --yes --quiet conda"
-    - "conda create --yes --quiet -n matrix_env python=%CONDA_PY%"
+    - "conda create --yes --quiet -n matrix_env python=%PYTHON_VERSION%"
     - "activate matrix_env"
 
     # Set the CONDA_NPY, although it has no impact on the actual build. We need this because of a test within conda-build.
