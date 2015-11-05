@@ -68,7 +68,9 @@ install:
     - cmd: set PYTHONUNBUFFERED=1
 
     - cmd: conda install -c http://conda.binstar.org/pelson/channel/development --yes --quiet obvious-ci
+    # XXX currently broken, install using conda
     - cmd: obvci_install_conda_build_tools.exe
+    - "conda install --yes --quiet conda-build anaconda-client jinja2 setuptools"
 
     - cmd: conda config --add channels conda-forge
     - cmd: conda config --set show_channel_urls yes
