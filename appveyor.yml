@@ -89,6 +89,7 @@ install:
     - ps: .\scripts\sync_cache.ps1
     # testing cache
     - cmd: conda remove --yes --quiet conda-build-all
+    - cmd: conda clean --yes --all
     - cmd: conda install --yes --quiet conda-build-all
 
 # Skip .NET project specific build phase.
