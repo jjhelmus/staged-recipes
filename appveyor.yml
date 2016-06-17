@@ -75,6 +75,7 @@ install:
     - cmd: if not exist C:\package-cache mkdir c:\package-cache
     - cmd: if not exist C:\package-cache\win-32 mkdir c:\package-cache\win-32
     - cmd: if not exist C:\package-cache\win-64 mkdir c:\package-cache\win-64
+    - cmd: conda install --yes conda-build
     - cmd: conda index c:\package-cache\win-32
     - cmd: conda index c:\package-cache\win-64
     - cmd: conda config -add channels file:///c:/package-cache
