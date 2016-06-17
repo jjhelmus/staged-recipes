@@ -92,6 +92,8 @@ install:
     - cmd: run_conda_forge_build_setup
     # sync conda packages to cache
     - ps: .\scripts\sync_cache.ps1
+    - cmd: conda index c:\package-cache\win-32
+    - cmd: conda index c:\package-cache\win-64
     # testing cache
     - cmd: dir C:\package-cache\win-32
     - cmd: dir C:\package-cache\win-64
