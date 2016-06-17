@@ -34,6 +34,11 @@ artifacts:
     # Store built conda packages as artifacts
     - path: 'conda_packages\*.bz2'
 
+#cache:
+#- C:\package-cache
+#- C:\package-cache\win-32
+#- C:\package-cache\win-64
+
 # We always use a 64-bit machine, but can build x86 distributions
 # with the TARGET_ARCH variable (which is used by CMD_IN_ENV).
 platform:
@@ -88,6 +93,9 @@ install:
     # sync conda packages to cache
     - ps: .\scripts\sync_cache.ps1
     # testing cache
+    - cmd: dir C:\package-cache\win-32
+    - cmd: dir C:\package-cache\win-64
+    - cmd: conda config --get channels
     - cmd: conda remove --yes --quiet conda-build-all
     - cmd: conda clean --yes --all
     - cmd: conda install --yes --quiet conda-build-all
