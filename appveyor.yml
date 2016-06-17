@@ -75,7 +75,7 @@ install:
     - cmd: if not exist C:\package-cache mkdir c:\package-cache
     - cmd: if not exist C:\package-cache\win-32 mkdir c:\package-cache\win-32
     - cmd: if not exist C:\package-cache\win-64 mkdir c:\package-cache\win-64
-    - cmd: conda install --yes conda-build
+    - cmd: conda install --yes --quiet conda-build
     - cmd: conda index c:\package-cache\win-32
     - cmd: conda index c:\package-cache\win-64
     - cmd: conda config --add channels file:///c:/package-cache
@@ -87,9 +87,9 @@ install:
     - cmd: run_conda_forge_build_setup
     # sync conda packages to cache
     - ps: if($env:TARGET_ARCH -eq 'x86')
-            {robocopy $root\pkgs C:\package-cache\win-32  *.bz2 /MIR}
+            {robocopy $root\pkgs C:\package-cache\win-32  *.bz2}
           else
-            {robocopy $root\pkgs C:\package-cache\win-64  *.bz2 /MIR}
+            {robocopy $root\pkgs C:\package-cache\win-64  *.bz2}
 
 # Skip .NET project specific build phase.
 build: off
