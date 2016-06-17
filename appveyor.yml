@@ -78,7 +78,7 @@ install:
     - cmd: conda install --yes conda-build
     - cmd: conda index c:\package-cache\win-32
     - cmd: conda index c:\package-cache\win-64
-    - cmd: conda config -add channels file:///c:/package-cache
+    - cmd: conda config --add channels file:///c:/package-cache
     # Install required packages
     - cmd: conda update --yes --quiet conda
 
