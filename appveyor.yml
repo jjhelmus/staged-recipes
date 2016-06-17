@@ -87,6 +87,9 @@ install:
     - cmd: run_conda_forge_build_setup
     # sync conda packages to cache
     - ps: .\scripts\sync_cache.ps1
+    # testing cache
+    - cmd: conda remove --yes --quiet conda-build-all
+    - cmd: conda install --yes --quiet conda-build-all
 
 # Skip .NET project specific build phase.
 build: off
